@@ -7,7 +7,8 @@ const HTTPHeaders = Object.freeze({
 })
 
 const ContentTypes = Object.freeze({
-  CSV: 'text/csv'
+  CSV: 'text/csv',
+  HTML: 'text/html'
 })
 
 site.head('/status', (request, response) => {
@@ -20,12 +21,12 @@ site.get('/status', (request, response) => {
   response.status(204)
 })
 
-site.get('/assets/dynamic/sheet.csv', async (request, response) => {
+site.get('/assets/dynamic/table.html', async (request, response) => {
 
-  response.header(HTTPHeaders.CONTENT_TYPE, ContentTypes.CSV)
+  response.header(HTTPHeaders.CONTENT_TYPE, ContentTypes.HTML)
   response.header(HTTPHeaders.ACCES_CONTROL_ALLOW_ORIGIN, 'https://awhs-dev.web.app')
 
-  response.send(await (await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_mdCaM5E7DwTqY7h3lgylU_rG7QwoSTEIT--4KDWVdqo3ekMmIMwmJcipzCqwPmBhqTPvROXcaeMI/pub?output=csv')).text())
+  response.send(await (await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQTvwwJ86OAu4_XHJhqgpUgkubscZ03FrGUjvZ20m3-_GyjCvadbe_YYFXsU0g1G2fCN3EAPuH2tp2h/pubhtml')).text())
 })
 
 site.get('/', (request, response) => {
